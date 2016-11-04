@@ -1,0 +1,11 @@
+[data-role="row"] {
+	text-align:center;
+}
+
+[data-role="square"] {
+	width: 150px;
+	height: 150px;
+	display:inline-table;
+	border: 1px solid black;
+	text-align:center;
+}

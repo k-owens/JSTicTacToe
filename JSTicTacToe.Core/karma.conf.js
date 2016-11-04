@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'gameClient.js',
+      'setup.js',
       'tests/*.js',
 	  'mock-ajax.js'
     ],
