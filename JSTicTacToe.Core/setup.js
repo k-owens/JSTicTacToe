@@ -1,8 +1,11 @@
 var setup = (function() {
-		function createSquare(row, column, rowHolder) {
+	function createSquare(row, column, rowHolder) {
 		var square = document.createElement("div");
 		square.setAttribute("data-id", row*3+column);
 		square.setAttribute("data-role", "square");
+		square.addEventListener('click', function() {
+			board.makeMove(row*3+column);
+		}, false);
 		square.innerHTML = "_";
 		rowHolder.appendChild(square);
 	}
