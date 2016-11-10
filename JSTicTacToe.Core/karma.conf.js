@@ -15,10 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+	  'application.js',
       'setup.js',
 	  'board.js',
-      'tests/*.js',
-	  'mock-ajax.js'
+	  'userInterface.js',
+      'tests/*.js'
     ],
 
 

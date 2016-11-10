@@ -4,7 +4,7 @@ var setup = (function() {
 		square.setAttribute("data-id", row*3+column);
 		square.setAttribute("data-role", "square");
 		square.addEventListener('click', function() {
-			board.makeMove(row*3+column);
+			application.handleClick(row*3+column);
 		}, false);
 		square.innerHTML = "_";
 		rowHolder.appendChild(square);

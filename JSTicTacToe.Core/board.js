@@ -11,29 +11,77 @@ var board =(function() {
 		return turn;
 	}
 	
-	function updateBoard(squareNumber) {
-			var squareToChange = document.querySelector("[data-id='" + squareNumber + "']");
-			if(boardState[squareNumber] === 0)
-				squareToChange.innerHTML = '_';
-			if(boardState[squareNumber] === 1)
-				squareToChange.innerHTML = 'O';
-			if(boardState[squareNumber] === 2)
-				squareToChange.innerHTML = 'X';
+	function isBoardFull() {
+		return boardState.indexOf(0) === -1;
+	}
+	
+	function didWin(comparedSpaces, playerNumber) {
+		for(i = 0; i < 3; i++) {
+			if(comparedSpaces[i] === 0 || comparedSpaces[i] !== playerNumber)
+				return false;
+		}
+		return true;
+	}
+	
+	function didPlayerWin(playerNumber) {
+		return didPlayerWinHorizontal(playerNumber) || didPlayerWinVertical(playerNumber)
+		|| didPlayerWinDiagonal(playerNumber);
+	}
+	
+	function didPlayerWinHorizontal(playerNumber) {
+		for(j = 0; j < 3; j++) {
+			var row = [boardState[3*j], boardState[3*j+1], boardState[3*j+2]];
+			if(didWin(row, playerNumber)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function didPlayerWinVertical(playerNumber) {
+		for(k = 0; k < 3; k++) {
+			var column = [boardState[k], boardState[k+3], boardState[k+6]];
+			if(didWin(column, playerNumber)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function didPlayerWinDiagonal(playerNumber) {
+		var diagonal1 = [boardState[0], boardState[4], boardState[8]];
+		var diagonal2 = [boardState[2], boardState[4], boardState[6]];
+		return didWin(diagonal1, playerNumber) || didWin(diagonal2, playerNumber);
+	}
+	
+	function isMoveLegal(squareNumber) {
+		return boardState[squareNumber] === 0 && !board.isGameOver();
 	}
 	
 	return {
+		getBoardState: function() {
+			return boardState;
+		},
+		
 		setBoardState: function(newBoardState) {
 			boardState = newBoardState;
 		},
 		
 		makeMove: function(squareNumber) {
-			if(boardState[squareNumber] === 0) {
+			if(isMoveLegal(squareNumber)) {
 				if(calculateTurnNumber() % 2 === 1)
 					boardState[squareNumber] = 1;
 				else
 					boardState[squareNumber] = 2;
-				updateBoard(squareNumber);
 			}
+		},
+		
+		hasComputerPlayerWon: function() {
+			return didPlayerWin(2);
+		},
+		
+		isGameOver: function() {
+			return didPlayerWin(1) || didPlayerWin(2) || isBoardFull();
 		}
 	};
 })();
