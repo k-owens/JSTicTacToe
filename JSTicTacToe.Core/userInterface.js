@@ -1,13 +1,16 @@
 var userInterface = (function() {
 	return {
-		updateSquare: function(squareNumber) {
-			var squareToChange = document.querySelector("[data-id='" + squareNumber + "']");
-			if(board.getBoardState()[squareNumber] === 0)
-				squareToChange.innerHTML = '_';
-			if(board.getBoardState()[squareNumber] === 1)
-				squareToChange.innerHTML = 'O';
-			if(board.getBoardState()[squareNumber] === 2)
-				squareToChange.innerHTML = 'X';
+		updateSquare: function(squareNumber, board) {
+			for(q = 0; q < 9; q++) {
+				var squareToChange = document.querySelector("[data-id='" + q + "']");
+				if(board.getBoardState()[q] === 0)
+					squareToChange.innerHTML = '_';
+				if(board.getBoardState()[q] === 1)
+					squareToChange.innerHTML = 'O';
+				if(board.getBoardState()[q] === 2)
+					squareToChange.innerHTML = 'X';
+			}
+
 		},
 		
 		tieGamePrompt: function() {

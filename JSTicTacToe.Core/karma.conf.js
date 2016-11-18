@@ -15,9 +15,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-	  'application.js',
-      'setup.js',
 	  'board.js',
+	  'application.js',
+	  'minimax.js',
+      'setup.js',
 	  'userInterface.js',
       'tests/*.js'
     ],
@@ -68,6 +69,8 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+	
+	browserNoActivityTimeout: 10000000
   })
 }

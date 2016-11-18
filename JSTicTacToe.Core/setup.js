@@ -1,10 +1,10 @@
 var setup = (function() {
-	function createSquare(row, column, rowHolder) {
+	function createSquare(row, column, rowHolder, obj) {
 		var square = document.createElement("div");
 		square.setAttribute("data-id", row*3+column);
 		square.setAttribute("data-role", "square");
 		square.addEventListener('click', function() {
-			application.handleClick(row*3+column);
+			application.handleClick(obj,row*3+column);
 		}, false);
 		square.innerHTML = "_";
 		rowHolder.appendChild(square);
@@ -19,6 +19,7 @@ var setup = (function() {
 	
 	return {
 		loadInitialBoard : function() {
+			var boardObj = new Board();
 			var board = document.createElement("div");
 			board.setAttribute("data-id", "board");
 			document.body.appendChild(board);
@@ -28,7 +29,7 @@ var setup = (function() {
 				var rowHolder = createRowHolder(board);
 				for(j = 0; j < 3; j++)
 				{
-					createSquare(i,j, rowHolder);
+					createSquare(i,j, rowHolder, boardObj);
 				}
 			}
 		}
